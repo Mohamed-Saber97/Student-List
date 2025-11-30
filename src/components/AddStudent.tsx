@@ -1,6 +1,7 @@
 import { Button, Paper, TextField } from "@mui/material"
 import { useEffect, useState, type ChangeEvent, type Dispatch, type SetStateAction } from "react"
 import { type Student } from "../utils/data";
+import { createStudent } from "../api/students";
 
 
 
@@ -46,8 +47,10 @@ export const AddStudent = ({ students, setStudents }: Props) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     }
 
-    const handelSubmit = () => {
-        setStudents([...students, formData]);
+    const handelSubmit = async() => {
+        //call post endpoint
+        const data = await createStudent(formData)
+        setStudents([...students, data]);
         setFormData(initialData);
         // if (nameRef.current) {
         //     nameRef.current.value = ""

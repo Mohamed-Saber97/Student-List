@@ -6,7 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 //import type { Dispatch } from "react";
 
 
@@ -25,15 +25,7 @@ export const StudentTable = ({ students }: Props) => {
     }
   }, [students]) // DependencyList --> on every change in this will fire and do effect but it work at least once
 
-  const studentsWithSchlarship = useMemo(() => {
-    return students.map((s) => {
-      let result = false;
-      for (let i = 0; i <= 10000; i++) {
-        result = Math.random() > .05;
-      }
-      return { ...s, eligible: result };
-    });
-  }, []);
+ 
   return (
     <>
       <TableContainer component={Paper} sx={{ width: 400 }}>
@@ -44,20 +36,20 @@ export const StudentTable = ({ students }: Props) => {
               <TableCell>Age</TableCell>
               <TableCell>Email</TableCell>
               <TableCell>Class</TableCell>
-              <TableCell>Ship</TableCell>
+              
             </TableRow>
           </TableHead>
           <TableBody>
 
             {
-              students.map((item, index) => {   // instead of data 
+              students.map((item) => {   // instead of data 
                 return (
                   <TableRow>
                     <TableCell>{item.fullName}</TableCell>
                     <TableCell>{item.age}</TableCell>
                     <TableCell>{item.email}</TableCell>
                     <TableCell>{item.class}</TableCell>
-                    <TableCell>{studentsWithSchlarship[index]?.eligible ? "Yes" : "No"}</TableCell>
+                    
                   </TableRow>
 
                 );
